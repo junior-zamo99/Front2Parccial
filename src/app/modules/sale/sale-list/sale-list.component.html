@@ -1,0 +1,82 @@
+<div class="flex flex-col md:flex-row bg-gray-100 dark:bg-gradient-to-br dark:from-blue-800 dark:via-teal-700 dark:to-cyan-700 text-gray-900 dark:text-white shadow-xl p-6 rounded-lg mt-6 backdrop-blur-md transition-colors duration-500">
+  
+  <!-- Lista de Ventas Recientes -->
+  <div class="w-full md:w-1/2 bg-white dark:bg-gray-900 shadow-2xl rounded-lg p-6 overflow-y-auto max-h-screen backdrop-blur-md mb-6 md:mb-0 transition-colors duration-500">
+    <h2 class="text-2xl font-semibold mb-4 border-b pb-2 text-gray-900 dark:text-white">Ventas Recientes</h2>
+    <ul class="space-y-3">
+      <li
+        *ngFor="let sale of sales()"
+        (click)="selectSale(sale)"
+        class="p-4 flex justify-between items-center cursor-pointer rounded-lg hover:bg-gray-700 transition duration-200 ease-in-out transform hover:scale-105"
+      >
+        <!-- Información de la venta -->
+        <div>
+          <p class="font-semibold text-gray-800 dark:text-white">Venta #{{ sale.id }}</p>
+          <p class="font-semibold text-gray-700 dark:text-white">Cliente: {{ sale.cliente.nombre }} {{ sale.cliente.apellidos }}</p>
+        </div>
+        <!-- Acciones -->
+        <div class="text-right space-y-1">
+          <p class="font-bold text-gray-600 dark:text-gray-300">{{ sale.totalAmount | currency: 'Bs ' }}</p>
+          <span class="text-xs font-semibold px-2 py-1 rounded-full bg-green-500 text-white dark:bg-green-600">
+            Completado
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Detalle de la Venta -->
+  <div class="w-full md:w-2/3 bg-white dark:bg-gray-900 shadow-2xl rounded-lg ml-0 md:ml-6 p-6 max-h-screen backdrop-blur-md overflow-hidden transition-colors duration-500">
+    <div class="flex justify-between items-center mb-4">
+      <button
+        (click)="createNewSale()"
+        class="py-2 px-4 bg-blue-500 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 dark:hover:from-blue-700 dark:hover:to-cyan-600 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300"
+      >
+        Nueva Venta
+      </button>
+    </div>
+
+    <div *ngIf="true">
+      <div *ngIf="user()">
+        <p class="mt-2 text-gray-800 dark:text-white"><span class="font-bold">Usuario:</span> {{ user()?.fullname ?? 'No disponible' }}</p>
+      </div>
+
+      <div *ngIf="!user()">
+        <p class="text-gray-600 dark:text-gray-400">No hay usuario disponible</p>
+      </div>
+
+       <p class="mt-2 text-gray-800 dark:text-white"><span class="font-bold">Cliente:</span> {{ selectedSale?.cliente?.nombre }}</p>
+      <p class="mt-2 text-gray-800 dark:text-white"><span class="font-bold">IdVenta:</span> {{ selectedSale?.id }}</p>
+      <p class="mt-2 text-gray-800 dark:text-white"><span class="font-bold">Fecha:</span> {{ selectedSale?.fecha | date }}</p>
+      <p class="mt-2 text-2xl font-bold text-green-500 dark:text-green-400">
+        <!-- Total: {{ 100  | currency: 'Bs ' }} -->
+      </p>
+
+      <h3 class="mt-6 text-lg font-semibold text-gray-900 dark:text-white">Productos</h3>
+      <div class="overflow-x-auto max-h-96">
+        <table class="table-auto w-full text-sm text-center mt-2 text-gray-800 dark:text-white">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 text-gray-800 dark:text-white">
+              <th class="p-2">IdDetalle</th>
+              <th class="p-2">Producto</th>
+              <th class="p-2">Cantidad</th>
+              <th class="p-2">Almacen</th>
+              <th class="p-2">Cliente</th>
+              <th class="p-2">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of selectedSaleDetail" class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <td class="p-2">{{ detalle.id }}</td>
+              <td class="p-2">{{ detalle.productoAlmacen!.producto!.nombre }}</td>
+              <td class="p-2">{{ detalle.cantidad }}</td>
+              <td class="p-2">{{ detalle.productoAlmacen!.almacen!.nombre }}</td>
+              <td class="p-2">{{ detalle.venta!.cliente.nombre }} {{ detalle.venta!.cliente.apellidos }}</td>
+              <td class="p-2">{{ detalle.monto | currency: 'Bs ' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

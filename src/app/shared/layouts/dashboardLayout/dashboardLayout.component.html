@@ -1,0 +1,51 @@
+<main [ngClass]="{ 'dark': isDarkMode }" class="flex flex-col sm:flex-row text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <!-- Sidebar -->
+  <nav class="hidden sm:flex flex-col w-72 min-h-screen bg-gray-200 dark:bg-gray-800 p-5 rounded-3xl overflow-y-auto max-h-screen transition-colors duration-300">
+    <h1 class="font-bold text-lg lg:text-3xl bg-gradient-to-br from-black via-gray-500 dark:from-white dark:via-white/50 bg-clip-text text-transparent text-center">
+      AppVenta<span class="text-indigo-500">.</span>
+    </h1>
+    <div class="border-gray-400 dark:border-gray-700 border my-5"></div>
+
+    <!-- Nav Links -->
+    <div class="flex flex-col space-y-2">
+      @for (route of routes; track $index) {
+        <app-sidebar
+          *ngIf="hasPermission(route.data!['permission'])"
+          [description]="route.data!['description']"
+          [icon]="route.data!['icon']"
+          [title]="route.data!['title']"
+          [path]="route.path!"
+        />
+      }
+    </div>
+  </nav>
+
+  <!-- Content Section -->
+  <section class="flex flex-col w-full max-h-screen bg-gray-50 dark:bg-gray-800 p-4 sm:mx-5 rounded-3xl transition-colors duration-300">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-200 dark:bg-gray-700 p-4 rounded-3xl mb-4 shadow-lg">
+      <div class="flex items-center space-x-3">
+        <span class="font-semibold text-lg">Bienvenido, {{ user?.username }}</span>
+        <span class="text-sm text-gray-600 dark:text-gray-400">Rol:
+        @for (item of user?.roles; track $index) {
+          {{ item.nombre_Rol }}
+        }
+        </span>
+      </div>
+      
+      <!-- Botón para cambiar de tema -->
+      <button (click)="toggleTheme()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm shadow-md transition-transform transform hover:scale-105">
+        {{ isDarkMode ? 'Modo Claro' : 'Modo Oscuro' }}
+      </button>
+
+      <button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm shadow-md ml-2">
+        Cerrar sesión
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex flex-auto flex-col overflow-y-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</main>

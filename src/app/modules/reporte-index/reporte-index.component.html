@@ -1,0 +1,50 @@
+<div class="mt-8 p-8 bg-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-xl max-w-4xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 text-center">Enviar Reportes</h2>
+  
+    <!-- Mostrar mensaje de error si hay uno -->
+    <div *ngIf="errorMessage" class="error-message text-red-500 text-center mb-6">
+      <p>{{ errorMessage }}</p>
+    </div>
+  
+    <!-- Formulario para agregar un cliente -->
+    <form [formGroup]="reporteForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="fechaInicio" class="text-gray-700 dark:text-white text-lg font-semibold">Fecha Inicio</label>
+          <input id="fechaInicio" formControlName="fechaInicio" type="date"
+                 class="w-full p-3 mt-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400" />
+        </div>
+  
+        <!-- Apellido Paterno -->
+        <div class="form-group">
+          <label for="fechaFin" class="text-gray-700 dark:text-white text-lg font-semibold">Fecha Fin</label>
+          <input id="fechaFin" formControlName="fechaFin" type="date"
+                 class="w-full p-3 mt-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400" />
+        </div>
+  
+        <!-- Teléfono -->
+        <div class="form-group">
+          <label for="tipo" class="text-gray-700 dark:text-white text-lg font-semibold">tipo</label>
+          <select name="tipo" id="tipo" formControlName="tipo" class="w-full p-3 mt-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+            <option value="">Selecciona un tipo</option>
+            <option value="1">Reporte de Ventas</option>
+            <option value="2">Reporte de Ingresos</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Botones centrados en la misma fila -->
+      <div class="flex justify-center space-x-4 mt-8">
+        <!-- Botón Crear Cliente -->
+        <button type="submit" [disabled]="reporteForm.invalid"
+                class="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-lg shadow-lg hover:from-blue-700 hover:to-cyan-600 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-500">
+          Enviar reporte
+        </button>
+  
+        <!-- Botón Volver -->
+      
+      </div>
+    </form>
+  </div>
+  

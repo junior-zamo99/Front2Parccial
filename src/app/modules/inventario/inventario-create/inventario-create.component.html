@@ -1,0 +1,43 @@
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-semibold mb-4">Crear Ajuste de Inventario</h2>
+    
+    <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Seleccionar el tipo de Ajuste</label>
+        <select class="w-full p-2 border rounded" [(ngModel)]="tipo">
+          <option value="">Seleccionar...</option>
+          <option *ngFor="let product of tipoAjuste" [value]="product.id">{{ product.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Descripcion</label>
+        <input type="text" class="w-full p-2 border rounded" [(ngModel)]="descipcion" />
+      </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Seleccionar Producto</label>
+      <select class="w-full p-2 border rounded" [(ngModel)]="selectedProduct">
+        <option value="">Seleccione un producto</option>
+        <option *ngFor="let product of availableProducts" [value]="product.id">{{ product.name }}</option>
+      </select>
+    </div>
+  
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Cantidad</label>
+      <input type="number" class="w-full p-2 border rounded" [(ngModel)]="cantidad" />
+    </div>
+  
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="addProduct()">
+      Agregar Producto
+    </button>
+  
+    <ul class="mt-4">
+      <li *ngFor="let p of products" class="border p-2 mt-2 rounded flex justify-between">
+        <span>Producto {{ p.idProductoAlmacen }} - Cantidad: {{ p.cantidad }}</span>
+      </li>
+    </ul>
+  
+    <button class="mt-4 w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" (click)="handleSubmit()">
+      Enviar Ajuste
+    </button>
+  </div>

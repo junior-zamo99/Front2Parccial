@@ -1,0 +1,31 @@
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Detalles del Inventario</h2>
+      <a class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" [routerLink]="['/dashboard/inventario/create']" routerLinkActive="router-link-active">Ajustar Inventario</a>
+    </div>
+  
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+        <thead>
+          <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">Producto</th>
+            <th class="py-3 px-6 text-left">Descripción</th>
+            <th class="py-3 px-6 text-left">Precio (Bs)</th>
+            <th class="py-3 px-6 text-left">Categoría</th>
+            <th class="py-3 px-6 text-left">Almacén</th>
+            <th class="py-3 px-6 text-left">Stock</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+          <tr *ngFor="let item of inventoryData" class="border-b border-gray-300 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left">{{ item.producto.nombre }}</td>
+            <td class="py-3 px-6 text-left">{{ item.producto.descripcion }}</td>
+            <td class="py-3 px-6 text-left">{{ item.producto.precio }}</td>
+            <td class="py-3 px-6 text-left">{{ item.producto.categoria.nombre }}</td>
+            <td class="py-3 px-6 text-left">{{ item.almacen.nombre }} ({{ item.almacen.ubicacion }})</td>
+            <td class="py-3 px-6 text-left">{{ item.stock }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

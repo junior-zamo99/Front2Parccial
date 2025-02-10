@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import LoginComponent from './modules/auth/login/login.component';
 import { DashboardLayoutComponent } from './shared/layouts/dashboardLayout/dashboardLayout.component';
+import { ReporteIndexComponent } from './modules/reporte-index/reporte-index.component';
+import { InventarioCreateComponent } from './modules/inventario/inventario-create/inventario-create.component';
+import { InventarioIndexComponent } from './modules/inventario/inventario-index/inventario-index.component';
 
 // BrowserModule
 // import { DashboardLayoutComponent } from './shared/layouts/dashboardLayout/dashboardLayout.component';
@@ -144,6 +147,30 @@ export const routes: Routes = [
           permission: 'Producto Almacen'
         },
       },
+      {
+        path:'reporte', component:ReporteIndexComponent,
+        data: {
+          icon: 'pi pi-file-pdf',
+          // icon: PrimeIcons.ANDROID,
+          title: 'Reporte',
+          description: 'Gestion de Reportes',
+          permission: 'Reporte'
+        },
+      },
+      {
+        path:'inventario/create' , component:InventarioCreateComponent,
+
+      },
+      {
+        path:'inventario' , component:InventarioIndexComponent,
+        data: {
+          icon: 'pi pi-file-pdf',
+          // icon: PrimeIcons.ANDROID,
+          title: 'Inventario',
+          description: 'Gestion de Inventario',
+          permission: 'Inventario'
+        },
+      }
       // {
       //   path: 'product',
       //    loadChildren: () =>
